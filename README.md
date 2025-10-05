@@ -1,158 +1,120 @@
-Expo University Pissser — Safe Demo
+# 🚽 Toilet Incidents Ranker
 
-Overview
-- This is a safe demo Expo app that shows a fictional university-style logo overlay on the camera and a simulated water stream effect.
-- Important: The app must NOT detect, identify, or target real-world logos, people, or property. It runs all frame processing locally and never uploads frames.
+**The ultimate toilet incident ranking app** — Upload your most epic bathroom disasters and let the community vote on them!
 
-Files created
-- `App.js` — Navigation and LogoContext
-- `screens/HomeScreen.js`, `screens/CameraScreen.js`, `screens/UploadLogoScreen.js`, `screens/LeaderboardScreen.js`
-- `components/StreamParticle.js` — tiny particle visual
-- `firebase/config.js` — Firebase initializer (fill env vars)
+Meet **Splashy the Sweaty Sausage** 🌭💦, your friendly mascot who helps you rank the most legendary toilet incidents from around the world.
 
-Setup
-1. Install Expo CLI and create a managed project, or drop these files into an existing Expo project.
-2. Install dependencies:
+## 🎬 Features
 
-```bash
-expo install expo-camera expo-image-picker
-npm install firebase
-npm install @react-navigation/native @react-navigation/stack
-expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
-expo install expo-document-picker expo-av
-```
+- **Instagram Reels-style interface** — Swipe through toilet incidents like TikTok
+- **Upload any media** — Videos, audio, whatever captures the incident
+- **Vote & rank** — Thumbs up/down system with real-time leaderboard  
+- **Auto-advance** — Automatically moves to next incident after voting
+- **Cloud storage** — All incidents stored forever in Firebase
+- **Multi-format support** — MP4, MOV, MP3, and more
 
-3. Firebase: enable a Firestore project and anonymous auth. In your environment (Expo `app.config.js` or using `dotenv`), set:
+## 🚀 How It Works
 
-```
-FIREBASE_API_KEY=...
-FIREBASE_AUTH_DOMAIN=...
-FIREBASE_PROJECT_ID=...
-FIREBASE_STORAGE_BUCKET=...
-FIREBASE_MESSAGING_SENDER_ID=...
-FIREBASE_APP_ID=...
-```
+1. **Upload** your toilet incident (video/audio)
+2. **Community votes** with thumbs up 👍 or thumbs down 👎  
+3. **Real-time leaderboard** ranks the most legendary incidents
+4. **Browse & enjoy** the chaos in fullscreen Instagram-style feed
 
-4. Run locally:
+## 🛠️ Tech Stack
 
-```bash
-expo start
-```
+- **React + Vite** — Fast development and builds
+- **Firebase Firestore** — Real-time database for votes and leaderboard
+- **Firebase Storage** — Cloud storage for incident media
+- **Instagram Reels UI** — Fullscreen vertical video feed
+- **Real-time updates** — Live vote counts and leaderboard changes
 
-Safety notes
-- Do NOT upload or target real-world logos, people, or private property. The app includes an explicit warning modal on upload.
-- No camera frames are ever uploaded; any motion detection must remain local. If you add extra code, keep it local-only.
+## 🚀 Getting Started
 
-Optional: Motion detector pseudo-code
-- See `MOTION_DETECTOR.md` for a commented outline of a low-res frame-difference implementation that runs locally and doesn't attempt recognition.
-# RankYourToilet (Next.js)
-
-A silly Next.js app to rate toilets around campus — because someone needs to rank them.
-
-Getting started
-
-1. Install dependencies
-
+### 1. Install Dependencies
 ```bash
 npm install
 ```
 
-2. Run the dev server
+### 2. Set up Firebase (Optional)
+Create a `.env.local` file with your Firebase config:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_domain
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_bucket
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
 
+### 3. Run Development Server
 ```bash
 npm run dev
 ```
+Open [http://localhost:5173](http://localhost:5173) to see your toilet incident ranker!
 
-3. Open http://localhost:3000
-
-What’s included
-
-- Simple Next.js pages for listing toilets and viewing details
-- API routes under `/api/toilets` with a small JSON file store at `data/db.json`
-- Add toilets and add reviews from the UI
-
-Map & OSM integration
-
-- There's now a `/map` page (Next) that uses Leaflet and the OpenStreetMap Overpass API to find nearby public toilets and let users rate them with emoji.
-- Ratings are saved server-side to `data/osm_ratings.json` via `/api/osm/ratings`.
-- For Google Maps integration: you can replace the TileLayer or add Places API lookups (requires API key and billing).
-
-New: Star rating UI and image uploads
-
-- The toilet detail page now has a clickable 5-star rating widget (no more dropdowns).
-- You can upload multiple images. If you configure Firebase the images upload to your Firebase Storage. Otherwise a fallback server endpoint saves images as files into `public/uploads` (useful for local testing).
-
-Notes
-
-- This is intentionally minimal. If you want persistence beyond the local JSON file or authentication, I can wire up SQLite/Postgres and auth next.
-
-Firebase image uploads
-
-1. Create a Firebase project at https://console.firebase.google.com and enable Firebase Storage.
-2. Add a web app in your Firebase project and copy the config values.
-3. In your project create a `.env.local` with these variables (replace values from Firebase):
-
-```env
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=...
-NEXT_PUBLIC_FIREBASE_APP_ID=...
+### 4. Build for Production
+```bash
+npm run build
 ```
 
-4. Restart the dev server (if running) and open a toilet detail page to upload images.
+## 📱 How to Use
 
-Security note: This scaffold uploads directly from the browser to Firebase Storage. For a production app, lock your Storage rules and consider authenticated uploads.
+1. **Upload Incident** — Click the upload button and select your media file
+2. **Privacy Warning** — App warns that uploads are public (safety first!)
+3. **Vote on Incidents** — Swipe through and vote 👍 or 👎
+4. **Check Leaderboard** — See top-ranked incidents on the right
+5. **Navigate** — Click leaderboard items or scroll indicators to jump around
 
-Video upload notes
-- The app supports uploading video files (user picks a file or records one). Uploaded videos are placed in Firebase Storage under `uploads/videos/{uid}/...`.
-- A metadata document is stored at `stream_videos/{uid}` with `videoUrl`, `userId`, and `createdAt`. This is intended for safe, consented uploads only.
-- Ensure your Firebase Storage rules only allow authenticated users to write to their own area, for example:
+## 🎮 Controls
 
-	match /uploads/videos/{userId}/{allPaths=**} {
-		allow write: if request.auth != null && request.auth.uid == userId;
-		allow read: if true;
-	}
+- **Mouse Wheel** — Scroll through incidents
+- **Click Indicators** — Jump to specific incident
+- **Vote Buttons** — Thumbs up/down (right side)
+- **Leaderboard** — Click items to jump to that incident
 
+## ⚠️ Safety Features
 
-Google Sign-In (optional)
---------------------------------
+- **Public Upload Warning** — Users are warned uploads are public
+- **MOV File Detection** — Warns about slow upload times  
+- **File Size Limits** — 100MB maximum file size
+- **Spam Protection** — 250ms cooldown between votes
+- **Error Handling** — Comprehensive error logging and recovery
 
-We added Google Sign-In via Expo Auth Session. To enable it you'll need to create OAuth client IDs in Google Cloud and set them in your Expo config or environment.
+## 🌭 Meet Splashy
 
-Quick steps (Expo-managed app)
+**Splashy the Sweaty Sausage** is your friendly toilet incident mascot! He appears in the top-right with a bright orange gradient and helps guide users through the ranking experience.
 
-1) Create OAuth credentials
-	- In Google Cloud Console > APIs & Services > Credentials create OAuth 2.0 Client IDs.
-	- Create a Web client ID (for Expo dev / web). Use that for `GOOGLE_CLIENT_ID`.
-	- Optionally create iOS / Android client IDs for standalone builds and set `GOOGLE_IOS_CLIENT_ID` / `GOOGLE_ANDROID_CLIENT_ID`.
+## 🚽 Sample Incidents
 
-2) Configure redirect URI for Expo (dev)
-	- When using Expo Auth Session during development, the redirect URI used by Expo is of the form:
-	  `https://auth.expo.io/@your-username/your-project-slug`
-	- Add that URI in the Google Cloud Console as an authorized redirect URI for your web client.
+The app comes pre-loaded with 4 sample toilet incident videos to get you started. Upload your own to add to the chaos!
 
-3) Set env vars
-	- Add the client IDs to your `.env.local` or CI environment and ensure `app.config.js` reads them into Expo `extra`:
+## 🔥 Deployment
 
-```
-EXPO_GOOGLE_CLIENT_ID=...     # web (used by Expo dev)
-EXPO_GOOGLE_IOS_CLIENT_ID=...
-EXPO_GOOGLE_ANDROID_CLIENT_ID=...
-```
+The built `dist/` folder is ready to deploy to:
+- **Netlify** (recommended for media files)
+- **Vercel** 
+- **Firebase Hosting**
+- **GitHub Pages**
 
-4) In Firebase Console > Authentication > Sign-in method enable 'Google' provider.
+Just drag and drop the `dist/` folder to any static hosting service!
 
-5) Restart Expo and test: open the Auth screen and tap 'Sign in with Google'.
+## 🏆 Leaderboard System
 
-Notes
- - Expo Auth Session requires the redirect URI to be registered with your Google OAuth client. Use the `expo whoami` and project slug to determine the exact redirect in dev.
- - For standalone builds, use the platform-specific client IDs you created.
+- **Real-time voting** — Vote counts update instantly
+- **Score calculation** — Likes minus dislikes
+- **Auto-sorting** — Highest scores appear at top
+- **Clickable navigation** — Jump directly to any ranked incident
 
+## 🎯 File Support
 
-Ranking behavior
---------------------------------
-- Submitting a score now upserts a per-user document at `stream_scores/{uid}` (instead of appending many documents). This keeps the leaderboard as one row per user.
-- The server-side Firestore rules should be adjusted if you require stricter write controls. For example, only allow users to write to `stream_scores/{request.auth.uid}`.
+**Supported formats:**
+- **Video**: MP4, MOV, AVI, WMV, FLV, WebM, MKV, M4V, 3GP
+- **Audio**: MP3, WAV, M4A, AAC, OGG
 
+**File size limit:** 100MB maximum
+
+---
+
+**⚠️ Disclaimer**: This app is for entertainment purposes only. Please be respectful and don't upload anything inappropriate or harmful!
+
+**🎉 Have fun ranking those toilet incidents!** 🚽💦
