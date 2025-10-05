@@ -1,0 +1,30 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Per-user metadata document used to enforce cooldowns safely
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false; // don't allow clients to arbitrarily change cooldown data in this sample
+    }
+
+    match /stream_scores/{docId} {
+      allow read: if true;
+      allow create: if request.auth != null
+        && request.resource.data.streamCount is int
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && hasCooldownPassed(30);
+
+      function hasCooldownPassed(seconds) {
+        // Check a per-user doc at /users/$(uid) for lastSubmit timestamp. If not present, allow.
+        let userDoc = get(/databases/$(database)/documents/users/$(request.auth.uid));
+        return !userDoc.exists() || (userDoc.data.lastSubmit < request.time - duration(seconds, 's'));
+      }
+    }
+  }
+}
+
+// NOTE: In production, use a secure server-side mechanism or Cloud Function to atomically
+// write both the stream_scores document and update the user's lastSubmit timestamp to
+// avoid race conditions. This sample demonstrates a simple rule-based cooldown check.

@@ -1,0 +1,21 @@
+{
+  "name": "simple-video-leaderboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "add-videos": "node addVideosToFirestore.js"
+  },
+  "dependencies": {
+    "firebase": "^9.23.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "vite": "5.1.0",
+    "dotenv": "^16.0.0"
+  },
+  "type": "module"
+}
